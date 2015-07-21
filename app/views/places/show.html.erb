@@ -8,8 +8,8 @@
       #map-canvas {
         height: 300px;
       }
-
   </style>
+
     <% if @place.latitude.present? && @place.longitude.present? %>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
     <script>
@@ -94,4 +94,14 @@
       <small><%= comment.user.email %></small>
     </blockquote>
   </div>
+
+
+<div class="clear"></div>
+<%= simple_form_for @photo, :url => '#' do |f| %>
+  <%= f.input :picture %>
+  <%= f.input :caption %>
+  <%= f.submit "Add a picture", :class => 'btn btn-primary' %>
+<% end %>
+
+
 <% end %>
