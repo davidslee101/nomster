@@ -49,6 +49,7 @@
 
 <div class="clear"></div>
 
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -74,70 +75,69 @@
 
 <div class = "col-xs-10 col-xs-offset-1">
   <h1 class="pull-left">Comments</h1>
-  <!-- Button trigger modal -->
-  <button class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal">
-    Add a comment
-  </button>
-</div>
-
-<div class = "clear"></div>
-
-<% @place.comments.each do |comment| %>
-  <div class = "col-xs-12 col-sm-6">
-    <blockquote>
-      <% if comment.humanized_rating.present? %>
-        <b><%= comment.humanized_rating %></b> -
-      <% end %>
-      <%= comment.message %>
-      <small><%= comment.user.email %></small>
-    </blockquote>
+    <!-- Button trigger modal -->
+    <button class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal">
+      Add a comment
+    </button>
   </div>
-<% end %>
 
-<br/>
+  <div class = "clear"></div>
 
-<!-- form for photo upload -->
-<div class="clear"></div>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Add a photo</h4>
-      </div>
-      
-        <%= simple_form_for @photo, :url => place_photos_path(@place) do |f| %>
-        <div class="modal-body">
-          <%= f.input :caption %>
-          <%= f.submit "Add a Photo", :class => 'btn btn-primary' %>
+  <% @place.comments.each do |comment| %>
+    <div class = "col-xs-12 col-sm-6">
+      <blockquote>
+        <% if comment.humanized_rating.present? %>
+          <b><%= comment.humanized_rating %></b> -
         <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <%= comment.message %>
+        <small><%= comment.user.email %></small>
+      </blockquote>
+    </div>
+  <% end %>
+
+  <br/>
+
+  <!-- form for photo upload -->
+  <div class="clear"></div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="photoLabel">Add a Photo</h4>
+        </div>
+        
+          <%= simple_form_for @photo, :url => place_photos_path(@place) do |f| %>
+          <div class="modal-body">
+            <%= f.input :caption %>
+            <%= f.input :picture %>.
+            <br/>
+            <%= f.submit "Add caption", :class => 'btn btn-primary' %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
-<div class = "col-xs-10 col-xs-offset-1">
-  <h1 class="pull-left">Photos</h1>
-  <!-- Button trigger modal -->
-  <button class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal">
-    Add a photo
-  </button>
-</div>
-<div class="clear"></div>
-
-<% @place.photos.each do |photo| %>
-  <div>
-    <blockquote>
-      <b><%= photo.caption %></b> -
-      <small><%= caption.user.email %></small>
-    </blockquote>
+  <div class = "col-xs-10 col-xs-offset-1">
+    <h1 class="pull-left">Photos</h1>
+    <!-- Button trigger modal -->
+    <button class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#photoModal">
+      Add a photo
+    </button>
   </div>
+  <div class="clear"></div>
+
+ <% @place.photos.each do |photo| %>
+  <%= image_tag photo.picture %>
+  <%= photo.caption %>
 <% end %>
+
 
